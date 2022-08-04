@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Fideos",
+        "price": 150,
+        "thumbnail": "https://www.recetas-argentinas.com/base/stock/Recipe/41-image/41-image_web.jpg"   
+    },
+    {
+        "name": "Hamburguesa",
+        "price": 680,
+        "thumbnail": "https://cdn2.cocinadelirante.com/sites/default/files/styles/gallerie/public/images/2020/04/recetas-de-hamburguesas-caseras-de-carne-molida.jpg"
+    },
+    {
+        "name": "Milanesas con Papas",
+        "price": 230,
+        "thumbnail": "https://astelus.com/wp-content/viajes/Plato-de-milanesa-con-papas-ti%CC%81pico-de-Argentina.jpg"
+    }
+]

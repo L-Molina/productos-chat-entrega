@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+}
+
+form {
+    background-color: goldenrod;
+    margin: 10px 25%;
+    padding: 30px;
+    width: 50%;
+    height: auto;
+}
+
+html {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    /* background-color: rgb(255, 196, 0); */
+    background-color: blanchedalmond;
+    min-height: 100vh;
+}
+
+.stick {
+    display: block;  
+    text-align: center;
+    position: sticky;
+}
+
+.chat-container {
+    position: absolute;
+    width: calc(100% - 20px);
+    max-width: 800px;
+    height: 480px;
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    background-color: mediumaquamarine;
+}
+  
+#messages {
+    position: relative;
+    list-style: none;
+    padding: 20px 10px 40px 10px;
+    margin: 0;
+    height: 350px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.form {
+    flex: 0 0 auto;
+    width: 50vw;  
+    margin: 0 auto;
+    border-radius: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    font-size: 2rem;
+    font-weight: 100;
+    padding: 2rem;
+}
+
+table .col {  
+    width: 33.3%;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+  
+table, td {
+    border-top: 1px solid;
+}
+
+input{
+    text-align: center; 
+    padding: 0.5rem;
+    margin: 0 auto 0.5rem;
+    border: none;
+    color: black;
+    border-radius: 10px;
+}
+   
+.productImage {
+    height: 1.5rem;
+    margin: 0.3rem auto;
+}
+
+.btn {
+    margin-top: 15px;
+    width: 150px;
+}
+
+.div-btn {
+    margin: 10px auto;
+    padding: 25px 10px;
+    width: 10%;
+}
+
+.table {
+    margin: 10px auto;
+    padding-top: 25px;
+    width: 50%;
+}
+
+img {
+    width: 200px;
+    height: auto;
+}
