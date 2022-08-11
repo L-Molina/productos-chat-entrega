@@ -11,6 +11,7 @@ const io = new IOServer(httpServer);
 const router = require("./routes")
 
 const messages = require("./public/messages.json");
+const products = require("./public/products.json");
 const Contenedor = require("./controller/controller");
 
 //plantilla
@@ -27,6 +28,10 @@ app.use("/", router);
 io.on('connection',function(socket) {
     console.log('Un cliente se ha conectado');
     socket.on('disconnect', () => console.log("Un cliente se ha desconectado"))
+    socket.on('new-product',data => {
+        Contenedor.addProduct(data)
+        io.sockets.emit('products', products)
+    });
 });
 
 io.on('connection',function(socket) {
