@@ -2,7 +2,7 @@ const express = require("express");
 const { Router } = require("express");
 const productRouter = Router();
 
-//importo el controller
+//Contenedor
 const Contenedor = require("../controller/controller")
 
 productRouter.get("/", (req, res) => {

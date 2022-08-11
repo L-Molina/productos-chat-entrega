@@ -2,13 +2,15 @@
 const socket = io.connect();
 
 //renderProducts
-function renderProducts(data) {
-    const html = data.map((productos, index) => {
-        return(`<tr>
+function renderProducts(data) {  
+    const html = data.map((productos, index) => {   
+        return(
+          `<tr>
             <td>${productos.name}</td>
             <td>${productos.price}</td>
             <td><img src="${productos.thumbnail}" class="productImage"></td>                  
-        </tr>`)
+          </tr>`
+        )
     }).join(" ");
     document.getElementById('tbodyList').innerHTML = html;
 }
@@ -17,7 +19,7 @@ function renderProducts(data) {
 function renderMessages(data) {
     const html = data.map((elem, index) => {
         return(`<div>
-            <strong>${elem.email}${elem.fecha}:</strong>
+            <strong>${elem.email} (${elem.fecha}):</strong>
             <em>${elem.mensaje}<em/> </div>`)
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
@@ -37,7 +39,7 @@ function addMessage(e) {
     return false;
 };
 
-socket.on('messages', function(data) { renderMessages(data); });
+socket.on('messages', data => renderMessages(data));
 socket.on('productos', data => { 
     fetch('products.json')
         .then(response => response.json())

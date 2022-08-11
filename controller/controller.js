@@ -1,4 +1,5 @@
 const products = require("./productos")
+const messages = require("./messages");
 
 class Contenedor {
     //getAll
@@ -25,6 +26,11 @@ class Contenedor {
     static deleteProduct(id) {
         return products.deleteProduct(id);
     };
+    
+    //addMessage
+    static addMessage(message){
+        return messages.addMessage(message);
+    }
 };
 
 module.exports = Contenedor;

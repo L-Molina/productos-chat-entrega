@@ -1,5 +1,26 @@
+const fs = require('fs')
 const products = require('../public/products.json');
-let id = 0;
+
+class Contenedor {
+    constructor (file){
+        this.file = file; 
+    }
+
+    async save(object){
+        try {
+            const data = await fs.promises.readFile(this.file);
+            const array = JSON.parse(data);
+            object.id = array.length + 1;
+            array.push(object);
+            await fs.promises.writeFile(this.file, JSON.stringify(array, null,2));
+            console.log('Se ha guardado el objeto con el id: ' + object.id);
+        } catch (err) {
+            throw new Error(err);
+        }
+    }
+}
+
+let contenedor = new Contenedor('./public/products.json');
 
 const productsList = () => {
     return products
@@ -11,15 +32,12 @@ const getProduct = (id) => {
 };
 
 const addProduct = (product) => {
-    id++
     const prod = {
-        id: id,
         name: product.name,
         price: product.price,
         thumbnail: product.thumbnail
     }
-    products.push(prod)
-    return product
+    contenedor.save(prod)
 };
 
 const updateProduct = (id, updatedContent) => {
