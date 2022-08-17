@@ -1,13 +1,24 @@
-# Coderhouse entrega 6: productos + chat
+# chat socket + knex
 
-Modificar el último entregable para que disponga de un canal de websocket que permita representar una tabla con la lista de productos en tiempo real.
+## Instalación
 
-- Puede haber varios clientes conectados simultáneamente y en cada uno de ellos se reflejarán los cambios que se realicen en los productos sin necesidad de recargar la vista.
+- Forkear + clonar repositorio
 
-- Cuando un cliente se conecte, recibirá la lista de productos a representar en la vista.
+- Parado en la raíz del proyecto correr el comando para instalar todas las dependecias del proyecto:
 
-En la parte inferior del formulario de ingreso se presentará el centro de mensajes almacenados en el servidor, donde figuren los mensajes de todos los usuarios identificados por su email.
+npm install
 
-- El formato a representar será: email (texto negrita en azul) [fecha y hora (DD/MM/YYYY HH:MM:SS)].
+- Instalar XAMPP
 
-- Además, incorporar dos elementos de entrada: uno para que el usuario ingrese su email (obligatorio para poder utilizar el chat) y otro para ingresar mensajes y enviarlos mediante un botón. 
+- Iniciar Apache y MySQL en XAMPP
+
+En http://localhost/phpmyadmin/ crear la base de datos "ecommerce" para poder interactuar con ella
+
+- Ejecutar esto para crear la tabla en phpmyadmin:
+
+node ./dataBase/create_products_table.js
+
+- Usar esto para correr el proyecto, disponible en http://localhost:8080
+
+npm node app.js
+

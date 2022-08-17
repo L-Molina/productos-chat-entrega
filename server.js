@@ -10,8 +10,8 @@ const io = new IOServer(httpServer);
 //router
 const router = require("./routes")
 
-const messages = require("./public/messages.json");
-const products = require("./public/products.json");
+const chat = require("./controller/messages");
+const items = require("./controller/productos");
 const Contenedor = require("./controller/controller");
 
 //plantilla
@@ -25,20 +25,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", router);
 
 //connection
-io.on('connection',function(socket) {
+io.on('connection', async function(socket) {
     console.log('Un cliente se ha conectado');
-    socket.on('disconnect', () => console.log("Un cliente se ha desconectado"))
     socket.on('new-product',data => {
-        Contenedor.addProduct(data)
-        io.sockets.emit('products', products)
+        try {
+            Contenedor.addProduct(data);
+            io.sockets.emit('products', products);
+        } catch (err) {
+            console.log(err);
+        }
     });
 });
 
-io.on('connection',function(socket) {
+io.on('connection', async function(socket) {
+    const messages = await chat.showMessage();
     socket.emit('messages', messages);
     socket.on('new-message',data => {
-        Contenedor.addMessage(data)
-        io.sockets.emit('messages', messages)
+        try {
+            Contenedor.addMessage(data);
+            io.sockets.emit('messages', messages);
+        } catch(err) {
+            console.log(err);
+        }
     });
 })
 

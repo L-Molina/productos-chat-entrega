@@ -1,65 +1,63 @@
-const fs = require('fs')
-const products = require('../public/products.json');
+const {options} = require('../dataBase/options/mariaDB.js');
+const knex = require('knex')(options);
 
-class Contenedor {
-    constructor (file){
-        this.file = file; 
-    }
-
-    async save(object){
-        try {
-            const data = await fs.promises.readFile(this.file);
-            const array = JSON.parse(data);
-            object.id = array.length + 1;
-            array.push(object);
-            await fs.promises.writeFile(this.file, JSON.stringify(array, null,2));
-            console.log('Se ha guardado el objeto con el id: ' + object.id);
-        } catch (err) {
-            throw new Error(err);
-        }
-    }
+const productsList = async () => {
+    try {    
+        const productos = await knex
+            .from('productos') 
+            .select('*') 
+            .orderBy('price', 'desc') 
+        return productos; 
+    } catch (err) {
+        throw new Error('No se pudo leer la Base de Datos', err)
+    }  
 }
 
-let contenedor = new Contenedor('./public/products.json');
+const getProduct = async (id) => {
+    try {
+        const producto = await knex
+        .from('productos') 
+        .select('*') 
+        .where({id}) 
+        .then((data) => { 
+            return data;
+        }).catch((err) => {    
+            throw new Error('No se pudo leer la Base de Datos', err)
+        });
+    } catch (err) {
+        throw new Error('No se pudo leer la Base de Datos', err)
+    } 
+} 
 
-const productsList = () => {
-    return products
-};
+const addProduct = async (product) => {
+    try {    
+        knex('productos') 
+        .insert(product) 
+        .then(() => { 
+        return ('Producto insertados')})
+        .catch((err) => {
+            throw new Error('No se pudo leer la Base de Datos', err)
+        })
+    } catch (err) {
+        throw new Error('No se pudo leer la Base de Datos', err)
+    }   
+}
 
-const getProduct = (id) => {
-    if (data.length === 0) {return ({"Error" : "Products list is empty"})} 
-    return (products.find(product => product.id === parseInt(id)) || { error: 'Product not Found' })
-};
-
-const addProduct = (product) => {
-    const prod = {
-        name: product.name,
-        price: product.price,
-        thumbnail: product.thumbnail
+const deleteProduct = async (i) => {
+    try {
+        knex
+        .from('productos') 
+        .where('id', '=', i) 
+        .del() 
+        .then (() => { 
+            return('Producto eliminado');  
+        }).catch((err) => {
+            throw new Error('No se pudo leer la DB', err)
+        })  
     }
-    contenedor.save(prod)
-};
+    catch (err) {
+        throw new Error('No se pudo leer la DB', err)
+    }  
+  } 
 
-const updateProduct = (id, updatedContent) => {
-    const product = getProduct(parseInt(id));
-    if ((product.id == id) && (product.id != null)) {
-        product.name = updatedContent.name;
-        product.price = updatedContent.price;
-        product.thumbnail = updatedContent.thumbnail;
-        return product
-    } else {
-        return "Product not Found"
-    }
-};
-
-const deleteProduct = (id) => {
-    const product = getProduct(parseInt(id));
-    if ((product.id == id) && (product.id != null)) {
-        products.splice(products.indexOf(product), 1);
-        return "Successfully Deleted Product"
-    } else {
-        return "Product not Found"
-    }
-};
-
-module.exports = { productsList, getProduct, addProduct, updateProduct, deleteProduct };
+module.exports = { productsList, getProduct, addProduct, deleteProduct };

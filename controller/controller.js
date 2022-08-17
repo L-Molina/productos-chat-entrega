@@ -17,20 +17,20 @@ class Contenedor {
         return products.addProduct(product)
     };
 
-    //updateProduct
-    static updateProduct(id, updatedContent) {
-        return products.updateProduct(id, updatedContent);
-    };
-
     //deleteProduct
     static deleteProduct(id) {
         return products.deleteProduct(id);
     };
     
+    //showMessage
+    static showMessage(message){
+        return messages.showMessage();
+    };
+
     //addMessage
     static addMessage(message){
         return messages.addMessage(message);
-    }
+    };
 };
 
 module.exports = Contenedor;
